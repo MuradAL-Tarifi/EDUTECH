@@ -5,6 +5,11 @@ namespace EDUTECH.Models
 {
     public partial class User
     {
+        public User()
+        {
+            Universities = new HashSet<University>();
+        }
+
         public int Id { get; set; }
         public string? UserName { get; set; }
         public string? Password { get; set; }
@@ -17,5 +22,7 @@ namespace EDUTECH.Models
         public DateTime? UpdatedDate { get; set; }
         public string? UpdatedBy { get; set; }
         public bool IsSuperAgent { get; set; }
+
+        public virtual ICollection<University> Universities { get; set; }
     }
 }

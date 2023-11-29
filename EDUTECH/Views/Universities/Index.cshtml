@@ -1,0 +1,266 @@
+﻿@model IEnumerable<University>
+@{
+    ViewData["Title"] = "Universities";
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- For IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- For Resposive Device -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EDUTECH</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="56x56" href="~/images/fav-icon/icon.png">
+
+
+    <!-- Main style sheet -->
+    <link rel="stylesheet" type="text/css" href="~/css/Home/style.css">
+    <link rel="stylesheet" type="text/css" href="~/fonts/lato-semibold/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/bootstrap/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/bootstrap-select/dist/css/bootstrap-select.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/time-picker/jquery.timepicker.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/revolution/settings.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/revolution/layers.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/revolution/navigation.css">
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/fonts/icon/font/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/owl-carousel/owl.theme.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/WOW-master/css/libs/animate.css">
+
+    <!-- responsive style sheet -->
+    <link rel="stylesheet" type="text/css" href="~/css/Home/responsive.css">
+
+
+
+</head>
+
+<body>
+    <div class="main-page-wrapper">
+
+
+        <!-- Header _________________________________ -->
+        <header class="main-header">
+
+
+            <div class="top-header">
+                <div class="container">
+                    <div class="left-side float-left">
+                        <ul>
+                            <li><span class="icon round-border"><i class="ficon flaticon-multimedia"></i></span> <a href="#" class="tran3s">info@edutech.com</a></li>
+                            <li><span class="icon round-border"><i class="ficon flaticon-technology"></i></span> <a href="#" class="tran3s">+8801712570051</a></li>
+                        </ul>
+                    </div> <!-- /.left-side -->
+                </div>
+            </div> <!-- /.top-header -->
+            <!-- _______________________ Theme Menu _____________________ -->
+
+            <div class="container">
+                <div class="main-menu-wrapper clear-fix">
+                    <div class="container">
+                        <div class="logo float-left"><a asp-controller="Home" asp-action="Index" style="vertical-align:middle;"><img src="~/images/logo/logo.png" alt="LOGO"></a></div>
+
+                        <form action="#" class="float-right">
+                            <input hidden type="text" placeholder="Search">
+                            <button hidden><i class="fa fa-search-minus" aria-hidden="true"></i></button>
+                        </form>
+
+                        <!-- Menu -->
+                        <nav class="navbar float-right">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li class="current-page-item">
+                                        <a href="#banner">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="#welcome">About</a>
+                                    </li>
+                                    <li>
+                                        <a href="#universities">Universities</a>
+
+                                    </li>
+
+
+                                    <li><a href="#information">contact</a></li>
+                                </ul>
+                            </div><!-- /.navbar-collapse -->
+                        </nav>
+                    </div>
+                </div> <!-- /.main-menu-wrapper -->
+            </div>
+        </header>
+
+
+        <!-- Inner Page Main Banner __________________ -->
+        <div class="inner-page-banner">
+            <div class="opacity">
+                <div class="container">
+                    <h2>Universities LIST</h2>
+                </div> <!-- /.container -->
+            </div> <!-- /.opacity -->
+        </div> <!-- /.inner-page-banner -->
+        <!-- Page Breadcrum __________________________ -->
+        <div class="page-breadcrum">
+            <div class="container">
+                <ul>
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li>-</li>
+                    <li>Universities</li>
+                </ul>
+            </div> <!-- /.container -->
+        </div> <!-- /.page-breadcrum -->
+
+
+
+        <div class="course-page-single course-v1">
+            <!-- Universities Finder  ______________________________ -->
+            <div class="course-search-option wow fadeInUp">
+                <div class="container">
+                    <form method="get" asp-action="Index" asp-controller="Universities">
+                        <div class="row">
+                            <div class="single-input float-left input-one" style="width: 87% !important;">
+                                <div>
+                                    <input name="search" id="search" type="text" placeholder="Enter University name">
+                                </div>
+                            </div> <!-- /.single-input -->
+
+                            <div class="single-input float-left input-three">
+                                <div>
+                                    <button type="submit" class="tran3s p-color-bg themehover">search</button>
+                                </div>
+                            </div> <!-- /.single-input -->
+                        </div>
+                    </form>
+                </div>
+            </div> <!-- /.Universities-search-option -->
+            <!-- Popular Course _________________________ -->
+            <div class="popular-course wow fadeInUp theme-bg-color">
+                <div class="container">
+                    <div class="row">
+                        <div class="course-item-wrapper">
+                            @foreach (var item in Model)
+                            {
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    <div class="hvr-float-shadow single-course-item">
+                                        <div class="img-holder"><img src="@item.Logo" alt="Image"></div>
+                                        <div class="text">
+                                            <h4><a href="@Url.Action("UniversityDetails","Universities",new { id = item.Id })">@item.Name</a></h4>
+                                            <p>@item.OutSideDescription</p>
+                                            <div class="clear-fix">
+                                                <ul class="float-left">
+                                                    <li><i class="fa fa-users" aria-hidden="true"></i> @item.StudetNumbers</li>
+                                                    <li><i class="fa fa-map-marker" aria-hidden="true"></i> @item.Location</li>
+                                                </ul>
+                                            </div>
+                                        </div> <!-- /.text -->
+                                    </div>
+                                </div> <!-- /.item -->
+                            }
+                        </div> <!-- /.course-slider -->
+                    </div> <!-- /.row -->
+                </div> <!-- /.container -->
+            </div> <!-- /.popular-course -->
+        </div> <!-- /.course-page-single -->
+        <!-- Footer ______________________________ -->
+        <footer>
+            <div class="top-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 footer-about">
+                            <h4>About edutech</h4>
+                            <p>EDUTECH Mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the sys- tem, and expound the actual teachings of the great explorer</p>
+                        </div> <!-- /.footer-about -->
+
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 footer-contact">
+                            <h4>CONTACT US</h4>
+                            <ul>
+                                <li>
+                                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                    <a href="mailto:helpneed@edutech.com" class="tran3s">helpneed@edutech.com</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                    <a href="tel:+8801712570051" class="tran3s">+8801712570051</a>
+                                </li>
+                                <li><i class="fa fa-map-marker" aria-hidden="true"></i>Edine rode,1234 Plot/RS ,CA</li>
+                            </ul>
+                        </div> <!-- /.footer-contact -->
+
+
+                    </div> <!-- /.row -->
+                </div> <!-- /.container -->
+            </div> <!-- /.top-footer -->
+
+            <div class="bottom-footer">
+                <p>Copyright 2016 &copy; <a href="http://themeforest.net/user/themazine/portfolio" class="tran3s" target="_blank">edutech</a> <span>|</span> Designed by <span class="p-color">edutech Team</span></p>
+            </div> <!-- /.bottom-footer -->
+        </footer>
+
+        <!-- Scroll Top Button -->
+        <button class="scroll-top tran3s p-color-bg">
+            <i class="fa fa-angle-up" aria-hidden="true"></i>
+        </button>
+        <!-- pre loader  -->
+        <div id="loader-wrapper">
+            <div id="loader"></div>
+        </div>
+
+
+
+
+
+        <!-- Js File_________________________________ -->
+        <!-- j Query -->
+        <script type="text/javascript" src="~/vendor/jquery-2.1.4.js"></script>
+
+        <!-- Bootstrap JS -->
+        <script type="text/javascript" src="~/vendor/bootstrap/bootstrap.min.js"></script>
+
+        <!-- Vendor js _________ -->
+        <!-- revolution -->
+        <script src="~/vendor/revolution/jquery.themepunch.tools.min.js"></script>
+        <script src="~/vendor/revolution/jquery.themepunch.revolution.min.js"></script>
+        <script type="text/javascript" src="~/vendor/revolution/revolution.extension.slideanims.min.js"></script>
+        <script type="text/javascript" src="~/vendor/revolution/revolution.extension.layeranimation.min.js"></script>
+        <script type="text/javascript" src="~/vendor/revolution/revolution.extension.navigation.min.js"></script>
+        <script type="text/javascript" src="~/vendor/revolution/revolution.extension.kenburn.min.js"></script>
+        <script type="text/javascript" src="~/vendor/revolution/revolution.extension.actions.min.js"></script>
+        <!-- Google map js -->
+        <script src="~/vendor/gmap.js"></script>
+        <!-- Bootstrap Select JS -->
+        <script type="text/javascript" src="~/vendor/bootstrap-select/dist/js/bootstrap-select.js"></script>
+        <!-- Time picker -->
+        <script type="text/javascript" src="~/vendor/time-picker/jquery.timepicker.min.js"></script>
+        <!-- WOW js -->
+        <script type="text/javascript" src="~/vendor/WOW-master/dist/wow.min.js"></script>
+        <!-- owl.carousel -->
+        <script type="text/javascript" src="~/vendor/owl-carousel/owl.carousel.min.js"></script>
+        <!-- js count to -->
+        <script type="text/javascript" src="~/vendor/jquery.appear.js"></script>
+        <script type="text/javascript" src="~/vendor/jquery.countTo.js"></script>
+
+        <!-- Theme js -->
+        <script type="text/javascript" src="~/js/Home/theme.js"></script>
+
+    </div> <!-- /.main-page-wrapper -->
+</body>
+
+</html>
+
