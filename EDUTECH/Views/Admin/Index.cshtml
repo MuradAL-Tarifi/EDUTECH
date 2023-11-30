@@ -1,0 +1,216 @@
+﻿@model EDUTECH.Dto.AdminViewModel
+@{
+    ViewData["Title"] = "Admin";
+    Layout = "";
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>University Admin</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="~/Admin/assets/plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="~/Admin/assets/css/main.css">
+
+    <link rel="stylesheet" href="~/Admin/assets/css/themes/all-themes.css" />
+</head>
+
+<body class="theme-blush">
+    <!-- Top Bar -->
+    <nav class="navbar clearHeader">
+        <div class="col-12">
+            <div class="navbar-header"> <a class="bars"></a> <a class="navbar-brand">Admin</a> </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <!--Side menu and right menu -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="admin-image"> <img src="~/Admin/assets/images/random-avatar7.jpg" alt=""> </div>
+                <div class="admin-action-info">
+                    <span>Welcome</span>
+                    <h3>@Model.User.Name</h3>
+                    <ul>
+                        <li><a data-placement="bottom" title="Logout" asp-controller="User" asp-action="Logout"><i class="zmdi zmdi-sign-in"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="active open"><a asp-controller="Admin" asp-action="Index"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
+                    <li><a asp-controller="Admin" asp-action="Users"><i class="zmdi zmdi-calendar-check"></i><span>Users</span> </a></li>
+                    <li><a asp-controller="Admin" asp-action="Universities"><i class="zmdi zmdi-calendar-check"></i><span>Universities</span> </a></li>
+                    <li><a asp-controller="Admin" asp-action="Events"><i class="zmdi zmdi-calendar-check"></i><span>Events</span> </a></li>
+                    <li><a asp-controller="Admin" asp-action="Books"><i class="zmdi zmdi-calendar-check"></i><span>Books</span> </a></li>
+                    <li><a asp-controller="Admin" asp-action="Colleges"><i class="zmdi zmdi-calendar-check"></i><span>Colleges</span> </a></li>
+                    <li><a asp-controller="Admin" asp-action="Sections"><i class="zmdi zmdi-calendar-check"></i><span>Sections</span> </a></li>
+                    <li><a asp-controller="Admin" asp-action="Specialties"><i class="zmdi zmdi-calendar-check"></i><span>Specialties</span> </a></li>
+                    <li><a asp-controller="Admin" asp-action="Messages"><i class="zmdi zmdi-calendar-check"></i><span>Messages</span> </a></li>
+                </ul>
+            </div>
+            <!-- #Menu -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+    </section>
+    <!--Side menu and right menu -->
+    <!-- main content -->
+    <section class="content home">
+        <div class="container-fluid">
+            <div class="block-header">
+                <div class="d-sm-flex justify-content-between">
+                    <div>
+                        <h2>Dashboard</h2>
+                        <small class="text-muted">Welcome to admin dashboard</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix top-report row-deck">
+                <div class="col-lg-3 col-sm-6 col-md-6">
+                    <div class="card">
+                        <div class="body">
+                            <h3>@Model.Universities.Count</h3>
+                            <p class="text-muted">New Universities</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-md-6">
+                    <div class="card">
+                        <div class="body">
+                            <h3>@Model.Universities.Select(x=>x.StudetNumbers).Sum()</h3>
+                            <p class="text-muted">Total Students</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-md-6">
+                    <div class="card">
+                        <div class="body">
+                            <h3>@Model.Events.Count</h3>
+                            <p class="text-muted">Total Events</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-md-6">
+                    <div class="card">
+                        <div class="body">
+                            <h3>@Model.Specialties.Count</h3>
+                            <p class="text-muted">Total Specialties</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <!-- Users Infos -->
+                <div class="col-sm-12 col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>Users Infos</h2>
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-hover dashboard-task-infos">
+                                    <thead>
+                                        <tr>
+                                            <th>User Name</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Is Admin</th>
+                                            <th>Is University Admin</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.Users)
+                                        {
+                                            <tr>
+                                                <td>@item.UserName</td>
+                                                <td>@item.Name</td>
+                                                <td>@item.Email</td>
+                                                <td>@item.IsAdmin</td>
+                                                <td>@item.IsSuperAgent</td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #END# Task Info -->
+            </div>
+            <div class="row clearfix">
+                <!-- Universities Infos -->
+                <div class="col-sm-12 col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>Universities Infos</h2>
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-hover dashboard-task-infos">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Side Description</th>
+                                            <th>Studet Numbers</th>
+                                            <th>Location</th>
+                                            <th>Link</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.Universities)
+                                        {
+                                            <tr>
+                                                <td>@item.Name</td>
+                                                <td>
+                                                    @item.OutSideDescription.Substring(0, 50) ...
+                                                </td>
+                                                <td>@item.StudetNumbers</td>
+                                                <td>@item.Location</td>
+                                                <td>@item.Link</td>
+
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #END# Task Info -->
+            </div>
+
+        </div>
+    </section>
+    <!-- main content -->
+
+    <div class="color-bg"></div>
+
+    <!-- Jquery Core Js -->
+    <script src="~/Admin/assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+    <script src="~/Admin/assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+    <script src="~/Admin/assets/bundles/morphingsearchscripts.bundle.js"></script> <!-- Main top morphing search -->
+
+    <script src="~/Admin/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script> <!-- Sparkline Plugin Js -->
+    <script src="~/Admin/assets/plugins/chartjs/Chart.bundle.min.js"></script> <!-- Chart Plugins Js -->
+
+    <script src="~/Admin/assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
+    <script src="~/Admin/assets/js/pages/charts/sparkline.min.js"></script>
+    <script src="~/Admin/assets/js/pages/index.js"></script>
+</body>
+
+<!-- Mirrored from thememakker.com/templates/swift/university/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Nov 2023 02:07:44 GMT -->
+</html>

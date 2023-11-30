@@ -102,5 +102,10 @@ namespace EDUTECH.Controllers
             }
             return new string(chars);
         }
+        public async Task<IActionResult> Logout()
+        {
+            HttpContext.Session.SetInt32(key, 0);
+            return RedirectToAction("Login", "User");
+        }
     }
 }

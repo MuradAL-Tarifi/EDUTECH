@@ -1,0 +1,132 @@
+﻿@using System.Web
+@model EDUTECH.Dto.AdminViewModel
+@{
+    ViewData["Title"] = "Admin";
+    Layout = "";
+}
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from thememakker.com/templates/swift/university/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Nov 2023 02:07:22 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>University Admin</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="~/Admin/assets/plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="~/Admin/assets/plugins/fullcalendar/fullcalendar.min.css">
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="~/Admin/assets/css/main.css">
+
+    <link rel="stylesheet" href="~/Admin/assets/css/themes/all-themes.css" />
+</head>
+
+<body class="theme-blush">
+    <!-- Top Bar -->
+    <nav class="navbar clearHeader">
+        <div class="col-12">
+            <div class="navbar-header"> <a class="bars"></a> <a class="navbar-brand">Admin</a> </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <!--Side menu and right menu -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="admin-image"> <img src="~/Admin/assets/images/random-avatar7.jpg" alt=""> </div>
+                <div class="admin-action-info">
+                    <span>Welcome</span>
+                    <h3>@Model.User.Name</h3>
+                    <ul>
+                        <li><a data-placement="bottom" title="Logout" asp-controller="User" asp-action="Logout"><i class="zmdi zmdi-sign-in"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="active open"><a asp-controller="Admin" asp-action="Index"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
+                    <li><a asp-controller="Admin" asp-action="Users"><i class="zmdi zmdi-calendar-check"></i><span>Users</span> </a></li>
+                    <li><a asp-controller="Admin" asp-action="Universities"><i class="zmdi zmdi-calendar-check"></i><span>Universities</span> </a></li>
+                    <li><a asp-controller="Admin" asp-action="Events"><i class="zmdi zmdi-calendar-check"></i><span>Events</span> </a></li>
+                    <li><a asp-controller="Admin" asp-action="Books"><i class="zmdi zmdi-calendar-check"></i><span>Books</span> </a></li>
+                    <li><a asp-controller="Admin" asp-action="Colleges"><i class="zmdi zmdi-calendar-check"></i><span>Colleges</span> </a></li>
+                    <li><a asp-controller="Admin" asp-action="Sections"><i class="zmdi zmdi-calendar-check"></i><span>Sections</span> </a></li>
+                    <li><a asp-controller="Admin" asp-action="Specialties"><i class="zmdi zmdi-calendar-check"></i><span>Specialties</span> </a></li>
+                    <li><a asp-controller="Admin" asp-action="Messages"><i class="zmdi zmdi-calendar-check"></i><span>Messages</span> </a></li>
+                </ul>
+            </div>
+            <!-- #Menu -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+    </section>
+    <!--Side menu and right menu -->
+    <!-- main content -->
+    <section class="content page-calendar">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-3 col-lg-4 col-md-12">
+                    <div class="card">
+                        <div class="body">
+                            <button type="button" class="btn btn-raised btn-primary btn-block m-t-0" data-toggle="modal" href="#cal-new-event">Events</button>
+                            <div class="">
+                                @foreach (var item in Model.Events)
+                                {
+                                    <div class="event-name b-greensea"> @item.Name <a class=" text-muted event-remove"></a> </div>
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-8 col-md-12">
+                    <div class="card">
+                        <div class="body">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-5 col-sm-12">
+                                    <h4 class="custom-font text-default m-0">Events Schedule</h4>
+                                </div>
+                                <div class="col-lg-8 col-md-7 col-sm-12 text-right">
+                                    <button class="btn btn-raised btn-success btn-sm" id="change-view-today">today</button>
+                                    <button class="btn btn-raised btn-default btn-sm" id="change-view-day">Day</button>
+                                    <button class="btn btn-raised btn-default btn-sm" id="change-view-week">Week</button>
+                                    <button class="btn btn-raised btn-default btn-sm" id="change-view-month">Month</button>
+                                </div>
+                            </div>
+                            <div class="tcol">
+                                <div id="calendar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- main content -->
+
+    <div class="color-bg"></div>
+
+    <!-- Jquery Core Js -->
+    <script src="~/Admin/assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+    <script src="~/Admin/assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+    <script src="~/Admin/assets/bundles/morphingsearchscripts.bundle.js"></script> <!-- Main top morphing search -->
+
+    <script src="~/Admin/assets/bundles/fullcalendarscripts.bundle.js"></script><!--/ calender javascripts -->
+        <script>
+        debugger;
+        var eventsViewModel = JSON.parse("@(Html.Raw(HttpUtility.JavaScriptStringEncode(Json.Serialize(Model.EventsDto).ToString())))");
+    </script>
+    <script src="~/Admin/assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
+        <script src="~/Admin/assets/js/admin.js"></script>
+
+</body>
+
+<!-- Mirrored from thememakker.com/templates/swift/university/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Nov 2023 02:07:44 GMT -->
+</html>
