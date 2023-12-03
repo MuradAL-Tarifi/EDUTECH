@@ -1,4 +1,4 @@
-﻿@model EDUTECH.Dto.AdminViewModel
+﻿@model EDUTECH.Dto.AgentViewModel
 @{
     ViewData["Title"] = "Admin";
     Layout = "";
@@ -24,7 +24,7 @@
     <!-- Top Bar -->
     <nav class="navbar clearHeader">
         <div class="col-12">
-            <div class="navbar-header"> <a class="bars"></a> <a class="navbar-brand">Admin</a> </div>
+            <div class="navbar-header"> <a class="bars"></a> <a class="navbar-brand">University Admin</a> </div>
         </div>
     </nav>
     <!-- #Top Bar -->
@@ -34,10 +34,10 @@
         <aside id="leftsidebar" class="sidebar">
             <!-- User Info -->
             <div class="user-info">
-                <div class="admin-image"> <img src="~/Admin/assets/images/random-avatar7.jpg" alt=""> </div>
+                <div class="admin-image"> <img src="@Model.University.Logo" alt=""> </div>
                 <div class="admin-action-info">
                     <span>Welcome</span>
-                    <h3>@Model.User.Name</h3>
+                    <h3>@Model.University.Name</h3>
                     <ul>
                         <li><a data-placement="bottom" title="Logout" asp-controller="User" asp-action="Logout"><i class="zmdi zmdi-sign-in"></i></a></li>
                     </ul>
@@ -48,27 +48,43 @@
             <div class="menu">
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
-                    <li class="active open"><a asp-controller="Admin" asp-action="Index"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
+                    <li class="active open"><a asp-controller="Agent" asp-action="Index"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
+                    <li><a asp-controller="Agent" asp-action="UniversityProfile"><i class="zmdi zmdi-calendar-check"></i><span>University Profile</span> </a></li>
                     <li>
-                        <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-accounts-outline"></i><span>Users</span> </a>
+                        <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-accounts-outline"></i><span>Events</span> </a>
                         <ul class="ml-menu">
-                            <li><a asp-controller ="Admin" asp-action="Users">All Users</a></li>
-                            <li><a asp-controller="Admin" asp-action="AddUser">Users Management</a></li>
+                            <li><a asp-controller="Agent" asp-action="Events">All Events</a></li>
+                            <li><a asp-controller="Agent" asp-action="AddEvent">Events Management</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-accounts-outline"></i><span>Universities</span> </a>
+                        <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-accounts-outline"></i><span>Books</span> </a>
                         <ul class="ml-menu">
-                            <li><a asp-controller="Admin" asp-action="Universities">All Universities</a></li>
-                            <li><a asp-controller="Admin" asp-action="AddUniversity">Universities Management</a></li>
+                            <li><a asp-controller="Agent" asp-action="Books">All Books</a></li>
+                            <li><a asp-controller="Agent" asp-action="AddBook">Books Management</a></li>
                         </ul>
                     </li>
-                    <li><a asp-controller="Admin" asp-action="Events"><i class="zmdi zmdi-calendar-check"></i><span>Events</span> </a></li>
-                    <li><a asp-controller="Admin" asp-action="Books"><i class="zmdi zmdi-calendar-check"></i><span>Books</span> </a></li>
-                    <li><a asp-controller="Admin" asp-action="Colleges"><i class="zmdi zmdi-calendar-check"></i><span>Colleges</span> </a></li>
-                    <li><a asp-controller="Admin" asp-action="Sections"><i class="zmdi zmdi-calendar-check"></i><span>Sections</span> </a></li>
-                    <li><a asp-controller="Admin" asp-action="Specialties"><i class="zmdi zmdi-calendar-check"></i><span>Specialties</span> </a></li>
-                    <li><a asp-controller="Admin" asp-action="Messages"><i class="zmdi zmdi-calendar-check"></i><span>Messages</span> </a></li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-accounts-outline"></i><span>Colleges</span> </a>
+                        <ul class="ml-menu">
+                            <li><a asp-controller="Agent" asp-action="Colleges">All Colleges</a></li>
+                            <li><a asp-controller="Agent" asp-action="AddCollege">Colleges Management</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-accounts-outline"></i><span>Sections</span> </a>
+                        <ul class="ml-menu">
+                            <li><a asp-controller="Agent" asp-action="Sections">All Sections</a></li>
+                            <li><a asp-controller="Agent" asp-action="AddSection">Sections Management</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-accounts-outline"></i><span>Specialties</span> </a>
+                        <ul class="ml-menu">
+                            <li><a asp-controller="Agent" asp-action="Specialties">All Specialties</a></li>
+                            <li><a asp-controller="Agent" asp-action="AddSpecialty">Specialties Management</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <!-- #Menu -->
@@ -83,7 +99,7 @@
                 <div class="d-sm-flex justify-content-between">
                     <div>
                         <h2>Dashboard</h2>
-                        <small class="text-muted">Welcome to admin dashboard</small>
+                        <small class="text-muted">Welcome to university dashboard</small>
                     </div>
                 </div>
             </div>
@@ -92,15 +108,15 @@
                 <div class="col-lg-3 col-sm-6 col-md-6">
                     <div class="card">
                         <div class="body">
-                            <h3>@Model.Universities.Count</h3>
-                            <p class="text-muted">New Universities</p>
+                            <h3>@Model.Colleges.Count</h3>
+                            <p class="text-muted">Total Colleges</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 col-md-6">
                     <div class="card">
                         <div class="body">
-                            <h3>@Model.Universities.Select(x=>x.StudetNumbers).Sum()</h3>
+                            <h3>@Model.University.StudetNumbers</h3>
                             <p class="text-muted">Total Students</p>
                         </div>
                     </div>
@@ -116,8 +132,8 @@
                 <div class="col-lg-3 col-sm-6 col-md-6">
                     <div class="card">
                         <div class="body">
-                            <h3>@Model.Specialties.Count</h3>
-                            <p class="text-muted">Total Specialties</p>
+                            <h3>@Model.Books.Count</h3>
+                            <p class="text-muted">Total Books</p>
                         </div>
                     </div>
                 </div>
@@ -127,72 +143,24 @@
                 <div class="col-sm-12 col-md-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Users Infos</h2>
+                            <h2>Colleges Infos</h2>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
                                 <table class="table table-hover dashboard-task-infos">
                                     <thead>
                                         <tr>
-                                            <th>User Name</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Is Admin</th>
-                                            <th>Is University Admin</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model.Users)
-                                        {
-                                            <tr>
-                                                <td>@item.UserName</td>
-                                                <td>@item.Name</td>
-                                                <td>@item.Email</td>
-                                                <td>@item.IsAdmin</td>
-                                                <td>@item.IsSuperAgent</td>
-                                            </tr>
-                                        }
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- #END# Task Info -->
-            </div>
-            <div class="row clearfix">
-                <!-- Universities Infos -->
-                <div class="col-sm-12 col-md-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>Universities Infos</h2>
-                        </div>
-                        <div class="body">
-                            <div class="table-responsive">
-                                <table class="table table-hover dashboard-task-infos">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Side Description</th>
-                                            <th>Studet Numbers</th>
-                                            <th>Location</th>
-                                            <th>Link</th>
+                                            <th>University Name</th>
+                                            <th>College Name</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var item in Model.Universities)
+                                        @foreach (var item in Model.Colleges)
                                         {
                                             <tr>
+                                                <td>@item.University.Name</td>
                                                 <td>@item.Name</td>
-                                                <td>
-                                                    @item.OutSideDescription.Substring(0, 50) ...
-                                                </td>
-                                                <td>@item.StudetNumbers</td>
-                                                <td>@item.Location</td>
-                                                <td>@item.Link</td>
-
                                             </tr>
                                         }
 

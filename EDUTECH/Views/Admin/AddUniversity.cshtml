@@ -1,0 +1,183 @@
+﻿@model EDUTECH.Dto.AdminViewModel
+@{
+    ViewData["Title"] = "Admin";
+    Layout = "";
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>University Admin</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="~/Admin/assets/plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- JQuery DataTable Css -->
+    <link href="~/Admin/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- Bootstrap Select Css -->
+    <link href="~/Admin/assets/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="~/Admin/assets/css/main.css">
+    <link rel="stylesheet" href="~/Admin/assets/css/themes/all-themes.css" />
+</head>
+
+<body class="theme-blush">
+    <!-- Top Bar -->
+    <nav class="navbar clearHeader">
+        <div class="col-12">
+            <div class="navbar-header"> <a class="bars"></a> <a class="navbar-brand">Admin</a> </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <!--Side menu and right menu -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="admin-image"> <img src="~/Admin/assets/images/random-avatar7.jpg" alt=""> </div>
+                <div class="admin-action-info">
+                    <span>Welcome</span>
+                    <h3>@Model.User.Name</h3>
+                    <ul>
+                        <li><a data-placement="bottom" title="Logout" asp-controller="User" asp-action="Logout"><i class="zmdi zmdi-sign-in"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="active open"><a asp-controller="Admin" asp-action="Index"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-accounts-outline"></i><span>Users</span> </a>
+                        <ul class="ml-menu">
+                            <li><a asp-controller="Admin" asp-action="Users">All Users</a></li>
+                            <li><a asp-controller="Admin" asp-action="AddUser">Users Management</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-accounts-outline"></i><span>Universities</span> </a>
+                        <ul class="ml-menu">
+                            <li><a asp-controller="Admin" asp-action="Universities">All Universities</a></li>
+                            <li><a asp-controller="Admin" asp-action="AddUniversity">Universities Management</a></li>
+                        </ul>
+                    </li>
+                    <li><a asp-controller="Admin" asp-action="Events"><i class="zmdi zmdi-calendar-check"></i><span>Events</span> </a></li>
+                    <li><a asp-controller="Admin" asp-action="Books"><i class="zmdi zmdi-calendar-check"></i><span>Books</span> </a></li>
+                    <li><a asp-controller="Admin" asp-action="Colleges"><i class="zmdi zmdi-calendar-check"></i><span>Colleges</span> </a></li>
+                    <li><a asp-controller="Admin" asp-action="Sections"><i class="zmdi zmdi-calendar-check"></i><span>Sections</span> </a></li>
+                    <li><a asp-controller="Admin" asp-action="Specialties"><i class="zmdi zmdi-calendar-check"></i><span>Specialties</span> </a></li>
+                    <li><a asp-controller="Admin" asp-action="Messages"><i class="zmdi zmdi-calendar-check"></i><span>Messages</span> </a></li>
+                </ul>
+            </div>
+            <!-- #Menu -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+    </section>
+    <!--Side menu and right menu -->
+    <!-- main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>Universities Management</h2>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>University Information </h2>
+                        </div>
+                        <div class="body">
+                            <form id="form_validation" method="post" asp-action="AddUniversity" enctype="multipart/form-data">
+                                <input type="text" class="form-control" asp-for="AddEditUniversity.Id" hidden>
+                                <div class="form-group form-float">
+                                    <div class="form-line focused">
+                                        <input type="text" class="form-control" asp-for="AddEditUniversity.Name" required>
+                                        <label class="form-label">University Name</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line focused">
+                                        <input type="text" class="form-control" asp-for="AddEditUniversity.StudetNumbers" required>
+                                        <label class="form-label">University Studet Numbers</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line focused">
+                                        <input type="text" class="form-control" asp-for="AddEditUniversity.Location" required>
+                                        <label class="form-label">Location</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line focused">
+                                        <input type="text" class="form-control" asp-for="AddEditUniversity.Link" required>
+                                        <label class="form-label">University Web Site Link</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line focused">
+                                        <textarea asp-for="AddEditUniversity.OutSideDescription" cols="30" rows="5" class="form-control no-resize" required></textarea>
+                                        <label class="form-label">Small Description For User Interface</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line focused">
+                                        <textarea asp-for="AddEditUniversity.InSideDescription" cols="30" rows="5" class="form-control no-resize" required></textarea>
+                                        <label class="form-label">Full Description For Details Interface</label>
+                                    </div>
+                                </div>
+                                <div class="form-group drop-custum">
+                                    <select class="form-control show-tick" asp-for="AddEditUniversity.UserId" required>
+                                        <option value="" disabled selected>Select User </option>
+                                        @foreach (var item in Model.Users.Where(x => x.IsSuperAgent == true))
+                                        {
+                                            <option value="@item.Id">@item.UserName</option>
+
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group form-float">
+                                    <label style="    font-size: 20px;">
+                                        <h6 style="font-weight: bold; color: black;" class="mb-0">
+                                            Please Click To Add University Picture
+                                        </h6>
+                                    </label> <input type="file" name="image" accept="image/*">
+                                </div>
+                                <button class="btn btn-raised btn-primary waves-effect" type="submit">SUBMIT</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="color-bg"></div>
+
+    <!-- Jquery Core Js -->
+    <script src="~/Admin/assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+    <script src="~/Admin/assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+    <script src="~/Admin/assets/bundles/morphingsearchscripts.bundle.js"></script> <!-- Main top morphing search -->
+
+    <script src="~/Admin/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script> <!-- Bootstrap Colorpicker Js -->
+    <script src="~/Admin/assets/plugins/dropzone/dropzone.js"></script> <!-- Dropzone Plugin Js -->
+    <script src="~/Admin/assets/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script> <!-- Input Mask Plugin Js -->
+    <script src="~/Admin/assets/plugins/multi-select/js/jquery.multi-select.js"></script> <!-- Multi Select Plugin Js -->
+    <script src="~/Admin/assets/plugins/jquery-spinner/js/jquery.spinner.js"></script> <!-- Jquery Spinner Plugin Js -->
+    <script src="~/Admin/assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script> <!-- Bootstrap Tags Input Plugin Js -->
+    <script src="~/Admin/assets/plugins/nouislider/nouislider.js"></script> <!-- noUISlider Plugin Js -->
+
+    <script src="~/Admin/assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
+    <script src="~/Admin/assets/js/pages/forms/advanced-form-elements.js"></script>
+</body>
+
+<!-- Mirrored from thememakker.com/templates/swift/university/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Nov 2023 02:07:44 GMT -->
+</html>
